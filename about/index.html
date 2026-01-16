@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAVELINK User Manual</title>
+    <style>
+        :root {
+            --primary-color: #0072bd; /* MATLAB Blue */
+            --secondary-color: #d9534f; /* Red for IoT/Stop */
+            --bg-color: #f4f4f4;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: var(--white);
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        /* Header & Logo Styles */
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header-logo {
+            max-width: 200px; 
+            height: auto;
+            display: block;
+            margin: 0 auto 15px auto; 
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        /* Section Styles */
+        h2 {
+            color: var(--primary-color);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 10px;
+            margin-top: 30px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+        }
+
+        /* Callout Boxes */
+        .note {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+
+        .warning {
+            background-color: #ffdddd;
+            border-left: 6px solid #f44336;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        code {
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #c7254e;
+        }
+
+        ol {
+            margin-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .step-box {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: #fafafa;
+        }
+        
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="WAVELINK Logo" class="header-logo">
+            
+            <h1>WAVELINK</h1>
+            <p>IoT-Integrated Waveguide Simulator | User Manual</p>
+        </header>
+
+        <section id="introduction">
+            <h2>1. Introduction</h2>
+            <p><strong>WAVELINK</strong> is a MATLAB-based simulation tool designed to visualize electromagnetic wave propagation in rectangular waveguides. It features two distinct operational modes:</p>
+            <ul>
+                <li><strong>Offline Mode:</strong> Standard desktop simulation with manual inputs.</li>
+                <li><strong>IoT Mode:</strong> Remote control and monitoring via the Blynk mobile app using a microcontroller (e.g., ESP32/ESP8266).</li>
+            </ul>
+        </section>
+
+        <section id="prerequisites">
+            <h2>2. Prerequisites</h2>
+            <div class="step-box">
+                <h3>Software & Hardware Requirements</h3>
+                <ul>
+                    <li>MATLAB R2022a or later (with App Designer).</li>
+                    <li>WAVELINK.m application file.</li>
+                    <li><strong>Hardware:</strong> ESP32 or ESP8266 Development Board (flashed with bridge code).</li>
+                    <li><strong>Mobile App:</strong> Blynk IoT (Android/iOS).</li>
+                    <li>USB Cable for connecting the microcontroller to the PC.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="offline-mode">
+            <h2>3. Offline Mode Procedure</h2>
+            <p>Use this mode to manually simulate waveguides using the desktop interface.</p>
+            <ol>
+                <li><strong>Launch the App:</strong> Open MATLAB, navigate to the folder containing <code>WAVELINK.m</code>, and type <code>WAVELINK</code> in the Command Window.</li>
+                <li><strong>Configure Inputs:</strong>
+                    <ul>
+                        <li>Set <strong>Mode</strong> (TEmn or TMmn).</li>
+                        <li>Input indices for <code>m</code> and <code>n</code>.</li>
+                        <li>Set dimensions: <code>a</code> (width), <code>b</code> (height), and <code>l</code> (length) in cm.</li>
+                        <li>Set Frequency <code>f</code> in GHz.</li>
+                        <li>Adjust material properties (<code>&epsilon;<sub>r</sub></code> and <code>&mu;<sub>r</sub></code>).</li>
+                    </ul>
+                </li>
+                <li><strong>Start Simulation:</strong> Click the <strong>SIMULATE</strong> button.</li>
+                <li><strong>Visualisation:</strong> Observe the <em>Electric Fields</em> and <em>Magnetic Fields</em> plots. Use the <strong>Pan</strong> and <strong>Tilt</strong> sliders to rotate the 3D view.</li>
+                <li><strong>Controls:</strong> Use <strong>PAUSE</strong> to freeze the wave animation or <strong>STOP</strong> to end the simulation.</li>
+            </ol>
+        </section>
+
+        <section id="iot-setup">
+            <h2>4. IoT Configuration (Blynk Setup)</h2>
+            <p>To use the Online Mode, you must configure Datastreams in your Blynk Console to match the keys expected by the MATLAB app.</p>
+            
+            <h3>Blynk Datastream Mapping</h3>
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Virtual Pin (Example)</th>
+                    <th>Command Key (Serial)</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Width (a)</td>
+                    <td>V0</td>
+                    <td><code>a</code></td>
+                    <td>Double/Float</td>
+                </tr>
+                <tr>
+                    <td>Height (b)</td>
+                    <td>V1</td>
+                    <td><code>b</code></td>
+                    <td>Double/Float</td>
+                </tr>
+                <tr>
+                    <td>Length (l)</td>
+                    <td>V2</td>
+                    <td><code>l</code></td>
+                    <td>Double/Float</td>
+                </tr>
+                <tr>
+                    <td>Frequency (f)</td>
+                    <td>V3</td>
+                    <td><code>f</code></td>
+                    <td>Double/Float</td>
+                </tr>
+                <tr>
+                    <td>Mode Select</td>
+                    <td>V4</td>
+                    <td><code>mode</code></td>
+                    <td>Integer (1=TE, 2=TM)</td>
+                </tr>
+                <tr>
+                    <td>Start/Stop</td>
+                    <td>V5</td>
+                    <td><code>cmd</code></td>
+                    <td>Integer (1=Start, 0=Stop)</td>
+                </tr>
+            </table>
+
+            <div class="note">
+                <strong>Hardware Bridge Logic:</strong> Your microcontroller code (Arduino/ESP32) must read these Virtual Pins from Blynk and print them to Serial in the format: <code>key:value</code> (e.g., <code>a:2.5</code>). It must also read Serial data from MATLAB (e.g., <code>fc:4.5</code>) and send it back to Blynk.
+            </div>
+        </section>
+
+        <section id="online-mode">
+            <h2>5. Online (IoT) Mode Procedure</h2>
+            <p>Follow these steps to control the simulation wirelessly via your phone.</p>
+            
+            <ol>
+                <li><strong>Connect Hardware:</strong> Plug your ESP32/ESP8266 into the computer's USB port.</li>
+                <li><strong>Identify COM Port:</strong> Check your Device Manager (Windows) to find the COM port number (e.g., <code>COM3</code>, <code>COM8</code>).</li>
+                <li><strong>Prepare Blynk:</strong> Open the Blynk app on your phone and ensure the device is "Online".</li>
+                <li><strong>Launch WAVELINK:</strong> Open the MATLAB app.</li>
+                <li><strong>Connect to IoT:</strong>
+                    <ul>
+                        <li>Enter the COM port in the <strong>IoT Port</strong> box (e.g., <code>COM8</code>).</li>
+                        <li>Click the <strong>Connect</strong> button.</li>
+                        <li>The status lamp should turn <span style="color: green; font-weight: bold;">GREEN</span>.</li>
+                    </ul>
+                </li>
+                <li><strong>Verify Lockout:</strong> A dialog will appear confirming "Online Mode Active". The desktop input fields will be disabled to prevent conflicts.</li>
+                <li><strong>Control via Phone:</strong>
+                    <ul>
+                        <li>Change sliders on your Blynk app to update dimensions or frequency.</li>
+                        <li>Press the <strong>Start/Simulate</strong> button on your phone.</li>
+                    </ul>
+                </li>
+                <li><strong>Monitor Feedback:</strong> Watch your phone screen. The <strong>Cutoff Frequency</strong> and <strong>Guided Wavelength</strong> widgets in Blynk will update in real-time based on the MATLAB calculations.</li>
+            </ol>
+
+            <div class="warning">
+                <strong>Important:</strong> Do not unplug the USB cable while the app is connected. Always click <strong>Disconnect</strong> in the app before removing hardware.
+            </div>
+        </section>
+
+        <section id="troubleshooting">
+            <h2>6. Troubleshooting</h2>
+            <ul>
+                <li><strong>General Issues:</strong> If the device hangs, freezes, or encounters any other errors, please close the application and rerun the device.</li>
+                <li><strong>Connection Failed:</strong> Ensure no other software (like Arduino IDE serial monitor) is using the COM port.</li>
+                <li><strong>No Data on Phone:</strong> Check if your microcontroller code is correctly parsing the data strings sent by MATLAB.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 WAVELINK Project Team. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

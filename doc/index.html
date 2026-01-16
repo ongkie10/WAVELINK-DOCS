@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAVELINK User Guide & Documentation</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-color: #2c3e50; /* Navy Blue */
+            --accent-color: #2980b9;  /* Bright Blue */
+            --bg-color: #ecf0f1;      /* Light Gray */
+            --text-color: #2c3e50;
+            --box-bg: #ffffff;
+            --code-bg: #282c34;       /* Dark Code Background */
+            --code-text: #abb2bf;     /* Light Code Text */
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+        /* Header & Nav */
+        header {
+            background-color: var(--box-bg);
+            border-bottom: 4px solid var(--accent-color);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-container img {
+            height: 55px;
+        }
+        .logo-container h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            margin-left: 20px;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 950px;
+            margin: 2rem auto;
+            background: var(--box-bg);
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        section {
+            margin-bottom: 4rem;
+        }
+        h2 {
+            color: var(--accent-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+        h3 {
+            color: var(--primary-color);
+            margin-top: 2rem;
+            font-size: 1.4rem;
+        }
+        p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        /* Callout Boxes */
+        .definition-box {
+            background-color: #f8f9fa;
+            border-left: 5px solid var(--accent-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .definition-box strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            color: #856404;
+            margin: 20px 0;
+        }
+        .formula-box {
+            background-color: #eef2f5;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        /* Code Blocks */
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+        code {
+            color: #e06c75; /* Reddish for inline code */
+            font-weight: bold;
+        }
+
+        /* Parameter Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            background-color: #ddd;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo">
+            <h1>WAVELINK</h1>
+        </div>
+        <nav>
+            <a href="#intro">Introduction</a>
+            <a href="#modes">Wave Modes</a>
+            <a href="#surface-current">Surface Current</a>
+            <a href="#code-logic">Code & Logic</a>
+            <a href="#formulas">Formulas</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <section id="intro">
+            <h2>What is a Waveguide?</h2>
+            <p>
+                A <strong>Rectangular Waveguide</strong> is essentially a hollow metallic pipe used to carry high-frequency radio waves (microwaves). Unlike a standard wire which carries electrical current, a waveguide carries <em>electromagnetic fields</em>.
+            </p>
+            <div class="definition-box">
+                <strong>The "Tunnel" Analogy</strong>
+                Imagine a tunnel. If you try to speak in a very low voice (low frequency), the sound dies out quickly. But if you yell (high frequency), the sound echoes and travels far. A waveguide acts like this tunnel: it acts as a <strong>High-Pass Filter</strong>, allowing only frequencies above a certain "Cutoff Frequency" to pass through.
+            </div>
+        </section>
+
+        <section id="modes">
+            <h2>Understanding Wave Modes</h2>
+            <p>
+                Inside the waveguide, the electromagnetic waves bounce off the walls in specific patterns called "Modes." The WAVELINK simulator visualizes these three distinct types of modes:
+            </p>
+
+            <h3>1. Transverse Electric (TE) Mode</h3>
+            
+            <p>
+                In this mode, the <strong>Electric Field (E)</strong> is entirely "transverse," meaning it is perpendicular to the direction the wave is moving (Z-axis). It never points forward or backward.
+            </p>
+            <ul>
+                <li><strong>Key Feature:</strong> There is no Electric field in the direction of propagation (\( E_z = 0 \)).</li>
+                <li><strong>Magnetic Field:</strong> Has a component that points in the direction of travel (\( H_z \neq 0 \)).</li>
+                <li><strong>Dominant Mode:</strong> The <strong>TE<sub>10</sub></strong> mode is the most important one. It requires the smallest waveguide dimensions to propagate.</li>
+            </ul>
+
+            <h3>2. Transverse Magnetic (TM) Mode</h3>
+            
+            <p>
+                In this mode, the <strong>Magnetic Field (H)</strong> is entirely transverse. It stays perpendicular to the direction of travel.
+            </p>
+            <ul>
+                <li><strong>Key Feature:</strong> There is no Magnetic field in the direction of propagation (\( H_z = 0 \)).</li>
+                <li><strong>Electric Field:</strong> Has a component that points in the direction of travel (\( E_z \neq 0 \)).</li>
+                <li><strong>Constraint:</strong> TM modes cannot exist if either mode index \( m \) or \( n \) is zero. The lowest TM mode is <strong>TM<sub>11</sub></strong>.</li>
+            </ul>
+
+            <h3>3. Transverse Electromagnetic (TEM) Mode</h3>
+            <div class="warning-box">
+                <strong>Why doesn't TEM work in Rectangular Waveguides?</strong><br>
+                The WAVELINK simulator will disable the "Start" button if you select TEM mode. This is correct physics!
+            </div>
+            <p>
+                In a TEM mode, <em>both</em> the Electric and Magnetic fields are perpendicular to the direction of travel. A TEM wave requires <strong>two separate conductors</strong> (like a Coaxial cable) to support a voltage difference. A rectangular waveguide has only <strong>one</strong> conductor (the walls), so it cannot support TEM waves.
+            </p>
+        </section>
+
+        <section id="surface-current">
+            <h2>Surface Current Density (\( \vec{J}_s \))</h2>
+            <p>
+                The WAVELINK simulator includes a 3D view of the <strong>Surface Current</strong>. These are real electrical currents flowing on the inner walls of the copper waveguide.
+            </p>
+            
+
+            <h3>The Formula</h3>
+            <p>The Surface Current Density \( \vec{J}_s \) is calculated directly from the Magnetic Field \( \vec{H} \) at the boundary:</p>
+            <div class="formula-box">
+                $$ \vec{J}_s = \hat{n} \times \vec{H} $$
+            </div>
+            <p>
+                Where \( \hat{n} \) is the unit vector normal (perpendicular) to the surface pointing inward. This explains why the arrows in the 3D view flow perpendicular to the magnetic field lines near the walls.
+            </p>
+        </section>
+
+        <section id="code-logic">
+            <h2>Code & Visualization Logic</h2>
+            <p>
+                How does MATLAB create these 3D graphics from simple math formulas? This section explains the key functions used in the WAVELINK code.
+            </p>
+
+            <h3>1. Creating the Wave Animation</h3>
+            <p>
+                The simulation doesn't "move" the wave. Instead, it recalculates the wave's phase at a slightly different position in every frame. This creates the illusion of movement (just like a flipbook).
+            </p>
+            <pre>
+% Animation Logic (inside updateSimulationStep)
+app.zPos = app.zPos - zSampDist;  % Shift Z position slightly
+z = app.zPos;                     % Update Z variable
+
+% Recalculate Fields with new Z
+[Ex, Ey, Ez] = fieldsTEmn(m, n, a, b, X, Y, Z, ...);</pre>
+
+            <h3>2. Visualizing Electric Fields (Surface Plot)</h3>
+            <p>
+                To show the colorful Electric Field, the code uses the <code>surf</code> command. This creates a "Texture Map" where the color represents the field strength (Red = Positive Max, Blue = Negative Max).
+            </p>
+            <pre>
+% Drawing the colored surface
+surf(app.UIAxes, xImage, yImage, zImage, ...
+     'CData', real(Exz1), ...       % Color Data = E-Field Strength
+     'FaceColor', 'texturemap');    % Smooth interpolation</pre>
+
+            <h3>3. Visualizing Magnetic Fields (Vector Plot)</h3>
+            <p>
+                Magnetic fields have direction, so we cannot just use colors. We use the <code>quiver3</code> command, which draws thousands of tiny arrows. The length and direction of each arrow show the field's behavior at that point.
+            </p>
+            <pre>
+% Drawing the vector arrows
+quiver3(app.UIAxes_2, X, Y, Z, ...
+        real(Hx), real(Hy), real(Hz)); % Arrow components (u,v,w)</pre>
+
+            <h3>4. Calculating Field Components</h3>
+            <p>
+                The math is solved in separate functions (<code>fieldsTEmn.m</code> and <code>fieldsTMmn.m</code>) to keep the code clean. Here is how the TE mode Magnetic Field \( H_z \) is translated into code:
+            </p>
+            <div class="formula-box">
+                $$ H_z = C \cos\left(\frac{m\pi x}{a}\right) \cos\left(\frac{n\pi y}{b}\right) e^{-j\beta z} $$
+            </div>
+            <pre>
+% MATLAB Implementation
+kx = m * pi / a;
+ky = n * pi / b;
+
+% ".*" allows calculating thousands of points at once (Vectorization)
+Hz = C .* cos(kx .* X) .* cos(ky .* Y) .* exp(-1j .* beta .* Z);</pre>
+        </section>
+
+        <section id="parameters">
+            <h2>Glossary of Parameters</h2>
+            <p>Before using the simulator, familiarize yourself with these inputs found on the control panel:</p>
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Variable</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><strong>Width</strong></td>
+                    <td>\( a \)</td>
+                    <td>The wider dimension of the waveguide cross-section. Usually determines the cutoff frequency.</td>
+                </tr>
+                <tr>
+                    <td><strong>Height</strong></td>
+                    <td>\( b \)</td>
+                    <td>The narrower dimension. Usually \( b = a/2 \) in standard waveguides.</td>
+                </tr>
+                <tr>
+                    <td><strong>Mode Indices</strong></td>
+                    <td>\( m, n \)</td>
+                    <td>Integers (0, 1, 2...) representing the number of "half-wave bumps" across the width (\(m\)) and height (\(n\)).</td>
+                </tr>
+                <tr>
+                    <td><strong>Frequency</strong></td>
+                    <td>\( f \)</td>
+                    <td>The operating frequency of the source. Must be higher than \( f_c \) to propagate.</td>
+                </tr>
+                <tr>
+                    <td><strong>Permittivity</strong></td>
+                    <td>\( \epsilon_r \)</td>
+                    <td>Dielectric constant of the material inside. Air = 1. Higher values slow the wave down.</td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="formulas">
+            <h2>Governing Physics Formulas</h2>
+            <p>The simulator uses the exact solutions to Maxwell's Equations for a rectangular boundary.</p>
+
+            <h3>1. Cutoff Frequency (\(f_c\))</h3>
+            <p>The frequency threshold below which the wave cannot travel.</p>
+            <div class="formula-box">
+                $$ f_c = \frac{1}{2\sqrt{\mu\epsilon}} \sqrt{ \left(\frac{m}{a}\right)^2 + \left(\frac{n}{b}\right)^2 } $$
+            </div>
+
+            <h3>2. TE Mode Fields</h3>
+            <p>Derived from the longitudinal magnetic field \(H_z\):</p>
+            <div class="formula-box">
+                $$ H_z = C \cos\left(\frac{m\pi x}{a}\right) \cos\left(\frac{n\pi y}{b}\right) e^{-j\beta z} $$
+                $$ E_x = \frac{j\omega\mu}{h^2} \frac{\partial H_z}{\partial y} \quad , \quad E_y = -\frac{j\omega\mu}{h^2} \frac{\partial H_z}{\partial x} $$
+            </div>
+
+            <h3>3. TM Mode Fields</h3>
+            <p>Derived from the longitudinal electric field \(E_z\):</p>
+            <div class="formula-box">
+                $$ E_z = C \sin\left(\frac{m\pi x}{a}\right) \sin\left(\frac{n\pi y}{b}\right) e^{-j\beta z} $$
+                $$ H_x = \frac{j\omega\epsilon}{h^2} \frac{\partial E_z}{\partial y} \quad , \quad H_y = -\frac{j\omega\epsilon}{h^2} \frac{\partial E_z}{\partial x} $$
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p><strong>WAVELINK Project</strong> &copy; 2026<br>
+        Developed for Educational & IoT Research Purposes.</p>
+    </footer>
+
+</body>
+</html>
